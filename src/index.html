@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Тестовое задание</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="page">
+      <section class="catalog" aria-label="Каталог курсов" data-catalog>
+        <div class="catalog__intro">
+          <span class="catalog__label">ENJOY YOUR STUDYING!</span>
+          <h1 class="catalog__title">Our online courses</h1>
+        </div>
+
+        <div class="catalog__controls">
+          <div class="catalog__tabs" role="tablist" data-tabs></div>
+          <div class="catalog__search">
+            <label class="search" aria-label="Поиск курса">
+              <input
+                class="search__input"
+                type="search"
+                placeholder="Search course..."
+                data-search-input
+              />
+              <img
+                class="search__icon"
+                src="./images/search.svg"
+                alt=""
+                aria-hidden="true"
+              />
+            </label>
+          </div>
+        </div>
+
+        <template id="course-card-template">
+          <article class="catalog-card">
+            <img class="catalog-card__image" src="" alt="" loading="lazy" />
+            <div class="catalog-card__body">
+              <span class="catalog-card__tag" data-tag=""></span>
+              <h3 class="catalog-card__title"></h3>
+              <div class="catalog-card__meta">
+                <span class="catalog-card__price"></span>
+                <span class="catalog-card__author"></span>
+              </div>
+            </div>
+          </article>
+        </template>
+
+        <div class="catalog__grid" data-catalog-grid></div>
+
+        <button class="catalog__more" type="button" data-load-more>
+          <span class="catalog__more-icon">⟳</span>
+          Load more
+        </button>
+      </section>
+    </div>
+
+    <script type="module" src="js/index.js"></script>
+  </body>
+</html>

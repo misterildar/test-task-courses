@@ -1,0 +1,88 @@
+const courses = [
+  {
+    id: "google-ads",
+    title: "The Ultimate Google Ads Training Course",
+    category: "Marketing",
+    price: 100,
+    mentor: "Jerome Bell",
+    image: "./images/google-ads.svg",
+  },
+  {
+    id: "product-mgmt",
+    title: "Product Management Fundamentals",
+    category: "Management",
+    price: 480,
+    mentor: "Marvin McKinney",
+    image: "./images/product-management.svg",
+  },
+  {
+    id: "hr-analytics",
+    title: "HR Management and Analytics",
+    category: "HR & Recruiting",
+    price: 200,
+    mentor: "Leslie Alexander Li",
+    image: "./images/hr-analytics.svg",
+  },
+  {
+    id: "brand-management",
+    title: "Brand Management & PR Communications",
+    category: "Marketing",
+    price: 530,
+    mentor: "Kristin Watson",
+    image: "./images/brand-management.svg",
+  },
+  {
+    id: "graphic-design",
+    title: "Graphic Design Basic",
+    category: "Design",
+    price: 500,
+    mentor: "Guy Hawkins",
+    image: "./images/graphic-design.svg",
+  },
+  {
+    id: "biz-dev",
+    title: "Business Development Management",
+    category: "Management",
+    price: 400,
+    mentor: "Dianne Russell",
+    image: "./images/business-development.svg",
+  },
+  {
+    id: "highload",
+    title: "Highload Software Architecture",
+    category: "Development",
+    price: 600,
+    mentor: "Brooklyn Simmons",
+    image: "./images/highload-architecture.svg",
+  },
+  {
+    id: "hr-selection",
+    title: "Human Resources – Selection and Recruitment",
+    category: "HR & Recruiting",
+    price: 150,
+    mentor: "Kathryn Murphy",
+    image: "./images/hr-selection.svg",
+  },
+  {
+    id: "ux-human-centered",
+    title: "User Experience. Human-centered Design",
+    category: "Design",
+    price: 240,
+    mentor: "Cody Fisher",
+    image: "./images/ux-human-centered.svg",
+  },
+];
+
+const catalogElements = {
+  tabs: document.querySelector("[data-tabs]"),
+  grid: document.querySelector("[data-catalog-grid]"),
+  searchInput: document.querySelector("[data-search-input]"),
+  loadMore: document.querySelector("[data-load-more]"),
+  cardTemplate: document.querySelector("#course-card-template").content,
+};
+
+const catalogConfig = {
+  initialVisible: 9,
+};
+
+export { courses, catalogElements, catalogConfig };

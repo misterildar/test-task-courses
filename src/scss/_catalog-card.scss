@@ -1,0 +1,57 @@
+@import "variables";
+
+.catalog-card {
+  border: 1px solid #e5e8ed;
+  background: #ffffff;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.catalog-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.25rem;
+}
+
+.catalog-card__image {
+  max-width: 390px;
+  max-height: 240px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.catalog-card__tag {
+  align-self: flex-start;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.catalog-card__title {
+  margin: 0;
+  font-size: 1.15rem;
+  min-height: 3.2rem;
+}
+
+.catalog-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.catalog-card__price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: $color-danger;
+}
+
+.catalog-card__author {
+  color: #6c6f80;
+  font-size: 0.95rem;
+}

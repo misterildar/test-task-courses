@@ -1,0 +1,14 @@
+@import "variables";
+
+.tabs__button {
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.tabs__button--active {
+  color: #ff3f3a;
+}

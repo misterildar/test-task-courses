@@ -1,0 +1,318 @@
+* {
+  box-sizing: border-box;
+}
+
+::root {
+  font-size: 16px;
+  color: #11113c;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, rgba(255, 235, 205, 0.6), transparent 45%), radial-gradient(circle at bottom right, rgba(188, 208, 255, 0.5), transparent 35%), #fffdfa;
+  color: #11113c;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.catalog {
+  width: min(1200px, 100% - clamp(32px, 6vw, 160px));
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0 clamp(3rem, 7vw, 5rem);
+  position: relative;
+}
+
+.catalog::before,
+.catalog::after {
+  content: "";
+  position: absolute;
+  background-repeat: repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.catalog::before {
+  width: 70px;
+  height: 150px;
+  left: clamp(-50px, -5vw, -20px);
+  top: clamp(40px, 8vw, 120px);
+  background-image: radial-gradient(circle, #ffd75f 12%, transparent 12%);
+  background-size: 14px 14px;
+}
+
+.catalog::after {
+  width: 90px;
+  height: 90px;
+  right: clamp(-30px, -3vw, 0px);
+  bottom: clamp(20px, 8vw, 140px);
+  background-image: linear-gradient(135deg, #ffe89b 0%, rgba(255, 255, 255, 0));
+  border-radius: 32px;
+}
+
+.catalog__intro {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.catalog__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ff6b6b;
+}
+
+.catalog__title {
+  margin: 0.4rem 0 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+}
+
+.catalog__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.catalog__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.catalog__search {
+  margin-left: auto;
+}
+
+.catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1rem, 3vw, 1.75rem);
+}
+
+.catalog__empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: inset 0 0 0 2px rgba(115, 82, 255, 0.1);
+  grid-column: 1/-1;
+}
+
+.catalog__more {
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  border: 1px solid #eceff4;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: #11113c;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog__more:hover {
+  border-color: #7352ff;
+  color: #7352ff;
+}
+
+.catalog__more-icon {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .catalog__controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .catalog__search {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+.tabs__button {
+  border: 1px solid transparent;
+  background: rgba(115, 82, 255, 0.08);
+  color: #11113c;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.tabs__button:hover {
+  background: rgba(115, 82, 255, 0.2);
+}
+
+.tabs__button--active {
+  background: #7352ff;
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(115, 82, 255, 0.35);
+}
+
+.search {
+  position: relative;
+}
+
+.search__input {
+  width: min(320px, 70vw);
+  border-radius: 999px;
+  border: 1px solid #eceff4;
+  padding: 0.8rem 3rem 0.8rem 1.25rem;
+  font-size: 0.95rem;
+  outline: none;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search__input:focus {
+  border-color: #7352ff;
+  box-shadow: 0 0 0 3px rgba(115, 82, 255, 0.15);
+}
+
+.search__icon {
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6c6f80;
+}
+
+@media (max-width: 768px) {
+  .search__input {
+    width: 100%;
+  }
+}
+.catalog-card {
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 20px 35px rgba(28, 20, 78, 0.08);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.catalog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 50px rgba(17, 17, 60, 0.12);
+}
+
+.catalog-card__media {
+  background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.65), transparent 40%), #ffdd55;
+  border-radius: 18px;
+  padding: 1.5rem 1.5rem 0;
+  height: 220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.catalog-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.catalog-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+.catalog-card__tag {
+  align-self: flex-start;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.catalog-card__title {
+  margin: 0;
+  font-size: 1.15rem;
+  min-height: 3.2rem;
+}
+
+.catalog-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.catalog-card__price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #7352ff;
+}
+
+.catalog-card__author {
+  color: #6c6f80;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 540px) {
+  .catalog-card__media {
+    height: 200px;
+  }
+  .catalog-card__title {
+    min-height: auto;
+  }
+}
+.catalog-card__tag[data-tag=Marketing] {
+  background: #eafaf2;
+  color: #1ab56b;
+}
+
+.catalog-card__tag[data-tag=Management] {
+  background: #ebe7ff;
+  color: #5d31ff;
+}
+
+.catalog-card__tag[data-tag="HR & Recruiting"] {
+  background: #fff2e0;
+  color: #ff7a00;
+}
+
+.catalog-card__tag[data-tag=Design] {
+  background: #ffeaf6;
+  color: #d50067;
+}
+
+.catalog-card__tag[data-tag=Development] {
+  background: #e7f3ff;
+  color: #1c6afe;
+}
+
+/*# sourceMappingURL=main.css.map */

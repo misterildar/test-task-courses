@@ -1,0 +1,16 @@
+@import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 1250px;
+  width: 100%;
+  padding: 100px 10px;
+  font-family: $font-family-base;
+}
