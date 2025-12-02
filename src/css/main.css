@@ -5,16 +5,16 @@
 }
 
 body {
-  margin: 0 auto;
   min-height: 100vh;
-  max-width: 1250px;
-  width: 100%;
-  padding: 100px 10px;
-  font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Lato", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
 }
 
 .catalog {
-  position: relative;
+  margin: 0 auto;
+  max-width: 1250px;
+  width: 100%;
+  padding: 100px 10px;
 }
 
 .catalog__intro {
@@ -42,20 +42,23 @@ body {
 .catalog__controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1.5rem;
   margin-bottom: clamp(1.5rem, 3vw, 2.75rem);
 }
 
 .catalog__tabs {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 0.75rem;
 }
 
 .catalog__search {
-  margin-left: auto;
+  margin-left: 0;
+  flex: 0 1 clamp(220px, 30vw, 320px);
 }
 
 .catalog__grid {
@@ -73,30 +76,81 @@ body {
 }
 
 .catalog__more {
-  margin: clamp(2rem, 5vw, 3rem) auto 0;
-  display: inline-flex;
+  margin: 4rem auto 0;
+  display: none;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.8rem;
-  border: 1px solid #eceff4;
+  justify-content: center;
+  gap: 1rem;
+  border: none;
   background: transparent;
   cursor: pointer;
   font-weight: 600;
   color: #1e212c;
-  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog__more-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.catalog__decoration {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.catalog__decoration--dots {
+  right: 0;
+  top: 10%;
+  max-width: 105px;
+  max-height: 143px;
+  width: 100%;
+  height: 100%;
+}
+
+.catalog__decoration--shapes-left {
+  left: 2%;
+  top: 50%;
+  max-width: 85px;
+  max-height: 85px;
+  width: 100%;
+  height: 100%;
+}
+
+.catalog__decoration--shapes {
+  right: 10%;
+  top: 65%;
+  max-width: 85px;
+  max-height: 85px;
+  width: 100%;
+  height: 100%;
 }
 
 .tabs__button {
   border: none;
   background-color: transparent;
   font-weight: 600;
-  padding: 0.65rem 1.4rem;
   cursor: pointer;
   font-size: 0.95rem;
+  color: #9a9ca5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+}
+
+.tabs__count {
+  font-size: 0.85rem;
+  vertical-align: super;
+  position: relative;
+  top: -0.2em;
 }
 
 .tabs__button--active {
   color: #ff3f3a;
+  border: 1px solid #ff3f3a;
+  border-radius: 4px;
 }
 
 .search {
@@ -106,11 +160,10 @@ body {
 .search__input {
   width: min(320px, 70vw);
   border-radius: 4px;
-  border: 1px solid #eceff4;
+  border: 1px solid #d7dadd;
   padding: 0.8rem 3rem 0.8rem 1.25rem;
   font-size: 0.95rem;
   outline: none;
-  background: #fff;
 }
 
 .search__input:focus {
@@ -127,8 +180,9 @@ body {
 }
 
 .catalog-card {
-  border: 1px solid #e5e8ed;
   background: #ffffff;
+  border: 1px solid #e5e8ed;
+  border-radius: 4px;
   box-shadow: 0 20px 35px rgba(30, 33, 44, 0.08);
   display: flex;
   flex-direction: column;
@@ -154,7 +208,8 @@ body {
   align-self: flex-start;
   padding: 0.35rem 0.9rem;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
+  color: #ffffff;
   border-radius: 4px;
 }
 
@@ -166,8 +221,8 @@ body {
 
 .catalog-card__meta {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
+  justify-content: flex-start;
   gap: 0.5rem;
 }
 
@@ -177,34 +232,35 @@ body {
   color: #ff4242;
 }
 
+.catalog-card__separator {
+  border: 1px solid #787a80;
+  height: 16px;
+}
+
 .catalog-card__author {
-  color: #6c6f80;
+  color: #787a80;
   font-size: 0.95rem;
+  align-self: center;
 }
 
 .catalog-card__tag[data-tag=Marketing] {
   background: #03cea4;
-  color: #ffffff;
 }
 
 .catalog-card__tag[data-tag=Management] {
   background: #5a87fc;
-  color: #ffffff;
 }
 
 .catalog-card__tag[data-tag="HR & Recruiting"] {
   background: #f89828;
-  color: #ffffff;
 }
 
 .catalog-card__tag[data-tag=Design] {
   background: #f52f6e;
-  color: #ffffff;
 }
 
 .catalog-card__tag[data-tag=Development] {
   background: #7772f1;
-  color: #ffffff;
 }
 
 /*# sourceMappingURL=main.css.map */

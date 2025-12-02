@@ -1,9 +1,7 @@
-@import "variables";
+@use "variables" as *;
 
 @each $name, $color in $tag-palette {
   .catalog-card__tag[data-tag="#{$name}"] {
     background: $color;
-    color: #ffffff;
   }
 }
-

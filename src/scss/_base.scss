@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables" as *;
 
 * {
   margin: 0;
@@ -7,10 +7,7 @@
 }
 
 body {
-  margin: 0 auto;
   min-height: 100vh;
-  max-width: 1250px;
-  width: 100%;
-  padding: 100px 10px;
-  font-family: $font-family-base;
+  font-family: $font-family;
+  font-size: 16px;
 }

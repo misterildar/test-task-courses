@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "sass --watch src/scss/main.scss src/css/main.css",
-    "build": "sass src/scss/main.scss src/css/main.css --style=compressed"
+    "build": "sass src/scss/main.scss src/css/main.css --style=compressed",
+    "lint": "eslint src/js --ext .js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^9.39.1",
     "sass": "^1.94.2"
   }
 }

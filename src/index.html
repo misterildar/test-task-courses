@@ -1,27 +1,46 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Тестовое задание</title>
+    <title>test task Ildar</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <div class="page">
-      <section class="catalog" aria-label="Каталог курсов" data-catalog>
+    <img
+      class="catalog__decoration catalog__decoration--dots"
+      src="./images/dots.svg"
+      alt=""
+      aria-hidden="true"
+    />
+    <img
+      class="catalog__decoration catalog__decoration--shapes-left"
+      src="./images/shapes-left.svg"
+      alt=""
+      aria-hidden="true"
+    />
+    <img
+      class="catalog__decoration catalog__decoration--shapes"
+      src="./images/shapes.svg"
+      alt=""
+      aria-hidden="true"
+    />
+    <main class="page">
+      <section class="catalog" aria-label="Courses catalog" data-catalog>
         <div class="catalog__intro">
-          <span class="catalog__label">ENJOY YOUR STUDYING!</span>
+          <p class="catalog__label">ENJOY YOUR STUDYING!</p>
           <h1 class="catalog__title">Our online courses</h1>
         </div>
 
         <div class="catalog__controls">
           <div class="catalog__tabs" role="tablist" data-tabs></div>
           <div class="catalog__search">
-            <label class="search" aria-label="Поиск курса">
+            <label class="search" aria-label="Search course">
               <input
                 class="search__input"
                 type="search"
                 placeholder="Search course..."
+                aria-label="Search courses"
                 data-search-input
               />
               <img
@@ -36,12 +55,18 @@
 
         <template id="course-card-template">
           <article class="catalog-card">
-            <img class="catalog-card__image" src="" alt="" loading="lazy" />
+            <img
+              class="catalog-card__image"
+              src=""
+              alt="card-image"
+              loading="lazy"
+            />
             <div class="catalog-card__body">
               <span class="catalog-card__tag" data-tag=""></span>
               <h3 class="catalog-card__title"></h3>
               <div class="catalog-card__meta">
                 <span class="catalog-card__price"></span>
+                <span class="catalog-card__separator"></span>
                 <span class="catalog-card__author"></span>
               </div>
             </div>
@@ -50,12 +75,22 @@
 
         <div class="catalog__grid" data-catalog-grid></div>
 
-        <button class="catalog__more" type="button" data-load-more>
-          <span class="catalog__more-icon">⟳</span>
+        <button
+          class="catalog__more"
+          type="button"
+          aria-label="Load more courses"
+          data-load-more
+        >
+          <img
+            class="catalog__more-icon"
+            src="./images/convert.svg"
+            alt=""
+            aria-hidden="true"
+          />
           Load more
         </button>
       </section>
-    </div>
+    </main>
 
     <script type="module" src="js/index.js"></script>
   </body>

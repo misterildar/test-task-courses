@@ -1,14 +1,19 @@
-@import "variables";
+@use "variables" as *;
+@use "mixins" as *;
 
 .tabs__button {
-  border: none;
-  background-color: transparent;
-  font-weight: 600;
-  padding: 0.65rem 1.4rem;
-  cursor: pointer;
-  font-size: 0.95rem;
+  @include inline-button-base($gray-600, 0.65rem, 1.4rem, 0.5rem);
+}
+
+.tabs__count {
+  font-size: 0.85rem;
+  vertical-align: super;
+  position: relative;
+  top: -0.2em;
 }
 
 .tabs__button--active {
-  color: #ff3f3a;
+  color: $primary;
+  border: 1px solid $primary;
+  border-radius: 4px;
 }

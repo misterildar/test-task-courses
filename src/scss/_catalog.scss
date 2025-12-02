@@ -1,7 +1,11 @@
-@import "variables";
+@use "variables" as *;
+@use "mixins" as *;
 
 .catalog {
-  position: relative;
+  margin: 0 auto;
+  max-width: 1250px;
+  width: 100%;
+  padding: 100px 10px;
 }
 
 .catalog__intro {
@@ -10,10 +14,7 @@
 }
 
 .catalog__label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
+  @include inline-flex-center(0.4rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.75rem;
@@ -27,22 +28,17 @@
 }
 
 .catalog__controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
+  @include flex-row-wrap-center(1.5rem);
   margin-bottom: clamp(1.5rem, 3vw, 2.75rem);
 }
 
 .catalog__tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  @include flex-row-wrap-center(0.75rem);
 }
 
 .catalog__search {
-  margin-left: auto;
+  margin-left: 0;
+  flex: 0 1 clamp(220px, 30vw, 320px);
 }
 
 .catalog__grid {
@@ -60,15 +56,52 @@
 }
 
 .catalog__more {
-  margin: clamp(2rem, 5vw, 3rem) auto 0;
-  display: inline-flex;
+  margin: 4rem auto 0;
+  display: none;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.8rem;
-  border: 1px solid #eceff4;
+  justify-content: center;
+  gap: 1rem;
+  border: none;
   background: transparent;
   cursor: pointer;
   font-weight: 600;
   color: $color-dark;
-  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog__more-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.catalog__decoration {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.catalog__decoration--dots {
+  right: 0;
+  top: 10%;
+  max-width: 105px;
+  max-height: 143px;
+  width: 100%;
+  height: 100%;
+}
+
+.catalog__decoration--shapes-left {
+  left: 2%;
+  top: 50%;
+  max-width: 85px;
+  max-height: 85px;
+  width: 100%;
+  height: 100%;
+}
+
+.catalog__decoration--shapes {
+  right: 10%;
+  top: 65%;
+  max-width: 85px;
+  max-height: 85px;
+  width: 100%;
+  height: 100%;
 }

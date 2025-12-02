@@ -1,26 +1,18 @@
-@import "variables";
+@use "variables" as *;
+@use "mixins" as *;
 
 .catalog-card {
-  border: 1px solid #e5e8ed;
-  background: #ffffff;
-  box-shadow: $shadow-card;
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
+  @include card();
+  @include flex-column(1.15rem);
 }
 
 .catalog-card__body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
+  @include flex-column(0.9rem);
   padding: 1.25rem;
 }
 
 .catalog-card__image {
-  max-width: 390px;
-  max-height: 240px;
-  width: 100%;
-  height: 100%;
+  @include responsive-box(390px, 240px);
   object-fit: cover;
 }
 
@@ -28,7 +20,8 @@
   align-self: flex-start;
   padding: 0.35rem 0.9rem;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
+  color: $white;
   border-radius: 4px;
 }
 
@@ -39,10 +32,7 @@
 }
 
 .catalog-card__meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.5rem;
+  @include flex-row(baseline, flex-start, 0.5rem);
 }
 
 .catalog-card__price {
@@ -51,7 +41,13 @@
   color: $color-danger;
 }
 
+.catalog-card__separator {
+  border: 1px solid $gray-700;
+  height: 16px;
+}
+
 .catalog-card__author {
-  color: #6c6f80;
+  color: $gray-700;
   font-size: 0.95rem;
+  align-self: center;
 }

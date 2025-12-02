@@ -1,166 +1,186 @@
 import { courses, catalogElements, catalogConfig } from "./data.js";
 
-const categories = [
-  "All",
-  ...new Set(courses.map((course) => course.category)),
-];
+const PAGE_SIZE = catalogConfig.initialVisible ?? 9;
 
 const state = {
   category: "All",
   query: "",
-  visible: catalogConfig.initialVisible,
+  visible: PAGE_SIZE,
 };
 
-function formatPrice(amount) {
-  return `$${amount}`;
-}
+const messages = {
+  empty:
+    "Nothing was found for your request. Please try a different filter or search query.",
+  by: "by",
+};
 
-function normalize(value) {
-  return value.trim().toLowerCase();
-}
+const normalize = (value) => value.trim().toLowerCase();
 
-function getFilteredCourses() {
+const formatPrice = (amount) =>
+  typeof amount === "number" ? `$${amount}` : String(amount);
+
+const categories = [
+  "All",
+  ...new Set(courses.map((course) => course.category).filter(Boolean)),
+];
+
+const categoryCounts = categories.reduce((acc, category) => {
+  acc[category] =
+    category === "All"
+      ? courses.length
+      : courses.filter((course) => course.category === category).length;
+  return acc;
+}, {});
+
+const getFilteredCourses = () => {
   const query = normalize(state.query);
+  const { category } = state;
 
   return courses.filter((course) => {
-    const matchesCategory =
-      state.category === "All" || course.category === state.category;
+    const matchesCategory = category === "All" || course.category === category;
     const matchesQuery = normalize(course.title).includes(query);
     return matchesCategory && matchesQuery;
   });
-}
+};
 
-function updateLoadMore(total) {
+const createCourseCard = (course) => {
+  const { cardTemplate } = catalogElements;
+  const root = cardTemplate.querySelector(".catalog-card")?.cloneNode(true);
+
+  if (!root) return document.createDocumentFragment();
+
+  const image = root.querySelector(".catalog-card__image");
+  const tag = root.querySelector(".catalog-card__tag");
+  const title = root.querySelector(".catalog-card__title");
+  const price = root.querySelector(".catalog-card__price");
+  const author = root.querySelector(".catalog-card__author");
+
+  if (image) {
+    image.src = course.image;
+    image.alt = course.title;
+  }
+
+  if (tag) {
+    tag.dataset.tag = course.category;
+    tag.textContent = course.category;
+  }
+
+  if (title) {
+    title.textContent = course.title;
+  }
+
+  if (price) {
+    price.textContent = formatPrice(course.price);
+  }
+
+  if (author) {
+    author.textContent = `${messages.by} ${course.mentor}`;
+  }
+
+  return root;
+};
+
+const updateLoadMore = (total) => {
   const { loadMore } = catalogElements;
   if (!loadMore) return;
 
-  if (total === 0) {
-    loadMore.style.display = "none";
-    return;
-  }
+  const hasMore = total > state.visible;
+  loadMore.style.display = total && hasMore ? "flex" : "none";
+  loadMore.disabled = !hasMore;
+};
 
-  if (total > state.visible) {
-    loadMore.style.display = "inline-flex";
-    loadMore.disabled = false;
-    loadMore.textContent = "Load more";
-  } else {
-    loadMore.style.display = "none";
-  }
-}
-
-function createCourseCard(course) {
-  const { title, category, price, mentor, image } = course;
-
-  const cardElement = catalogElements.cardTemplate
-    .querySelector(".catalog-card")
-    .cloneNode(true);
-
-  const cardImage = cardElement.querySelector(".catalog-card__image");
-  const cardTag = cardElement.querySelector(".catalog-card__tag");
-  const cardTitle = cardElement.querySelector(".catalog-card__title");
-  const cardPrice = cardElement.querySelector(".catalog-card__price");
-  const cardAuthor = cardElement.querySelector(".catalog-card__author");
-
-  cardImage.src = image;
-  cardImage.alt = title;
-  cardTag.dataset.tag = category;
-  cardTag.textContent = category;
-  cardTitle.textContent = title;
-  cardPrice.textContent = formatPrice(price);
-  cardAuthor.textContent = `by ${mentor}`;
-
-  return cardElement;
-}
-
-function renderCourses() {
+const renderCourses = () => {
   const { grid } = catalogElements;
+  if (!grid) return;
+
   const filtered = getFilteredCourses();
   const visibleCourses = filtered.slice(0, state.visible);
 
   grid.innerHTML = "";
 
-  if (visibleCourses.length === 0) {
+  if (!visibleCourses.length) {
     const empty = document.createElement("div");
     empty.className = "catalog__empty";
-    empty.textContent =
-      "По вашему запросу ничего не найдено. Попробуйте другой фильтр или запрос.";
+    empty.textContent = messages.empty;
     grid.append(empty);
     updateLoadMore(0);
     return;
   }
 
-  visibleCourses.forEach((course) => {
-    const card = createCourseCard(course);
-    grid.append(card);
-  });
-  updateLoadMore(filtered.length);
-}
+  const fragment = document.createDocumentFragment();
+  visibleCourses.forEach((course) => fragment.append(createCourseCard(course)));
 
-function renderTabs() {
+  grid.append(fragment);
+  updateLoadMore(filtered.length);
+};
+
+const renderTabs = () => {
   const { tabs } = catalogElements;
+  if (!tabs) return;
+
   const fragment = document.createDocumentFragment();
 
   categories.forEach((category) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "tabs__button";
+    button.setAttribute("role", "tab");
     button.dataset.value = category;
-    button.textContent = category;
 
-    if (category === state.category) {
-      button.classList.add("tabs__button--active");
-      button.setAttribute("aria-pressed", "true");
-    } else {
-      button.setAttribute("aria-pressed", "false");
-    }
+    const count = categoryCounts[category] ?? 0;
+    const isActive = category === state.category;
+
+    button.innerHTML = `${category} <span class="tabs__count">${count}</span>`;
+    button.classList.toggle("tabs__button--active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+    button.setAttribute("aria-selected", String(isActive));
 
     fragment.append(button);
   });
 
   tabs.innerHTML = "";
   tabs.append(fragment);
-}
+};
 
-function handleTabClick(event) {
-  if (!event.target.matches(".tabs__button")) {
-    return;
-  }
+const render = () => {
+  renderTabs();
+  renderCourses();
+};
 
-  const { value } = event.target.dataset;
-  if (!value || value === state.category) {
-    return;
-  }
+const handleTabClick = (event) => {
+  const target = event.target.closest?.(".tabs__button");
+  if (!target) return;
+
+  const { value } = target.dataset;
+  if (!value || value === state.category) return;
 
   state.category = value;
-  state.visible = catalogConfig.initialVisible;
-  renderTabs();
-  renderCourses();
-}
+  state.visible = PAGE_SIZE;
+  render();
+};
 
-function handleSearch(event) {
-  state.query = event.target.value;
-  state.visible = catalogConfig.initialVisible;
+const handleSearch = (event) => {
+  const value = event.target?.value ?? "";
+  state.query = value;
+  state.visible = PAGE_SIZE;
   renderCourses();
-}
+};
 
-function handleLoadMore() {
-  state.visible += 3;
+const handleLoadMore = () => {
+  state.visible += PAGE_SIZE;
   renderCourses();
-}
+};
 
-function initCatalog() {
+const initCatalog = () => {
   const { tabs, grid, searchInput, loadMore, cardTemplate } = catalogElements;
 
-  if (!tabs || !grid || !searchInput || !loadMore || !cardTemplate) {
-    return;
-  }
+  if (!tabs || !grid || !searchInput || !loadMore || !cardTemplate) return;
 
-  renderTabs();
-  renderCourses();
+  render();
 
   tabs.addEventListener("click", handleTabClick);
   searchInput.addEventListener("input", handleSearch);
   loadMore.addEventListener("click", handleLoadMore);
-}
+};
 
 export { initCatalog };
